@@ -10,54 +10,63 @@ import java.util.Arrays;
  * Created by rwozn on 24.11.2016.
  */
 public class Jarvis {
+    private static final Double ZERO = new Double(0);
 
-    private boolean CCW(Point p, Point q, Point r)
+    public ConvexHull convexHull(final ArrayList<Point> src)
     {
-        double val = (q.getY() - p.getY()) * (r.getX() - q.getX()) - (q.getX() - p.getX()) * (r.getY() - q.getY());
+        if (src == null)
+            return new ConvexHull();
 
-        if (val >= 0)
-            return false;
-        return true;
-    }
-    public ConvexHull convexHull(ArrayList<Point> points)
-    {
-        int n = points.size();
-        /** if less than 3 points return **/
-        if (n < 3)
-            return new ConvexHull(points);
-        int[] next = new int[n];
-        Arrays.fill(next, -1);
+        if (src.size() < 3)
+            return new ConvexHull();
 
-        /** find the leftmost point **/
-        int leftMost = 0;
-        for (int i = 1; i < n; i++)
-            if (points.get(i).getX() < points.get(leftMost).getX())
-                leftMost = i;
-        int p = leftMost, q;
-        /** iterate till p becomes leftMost **/
+        final ArrayList<Point> points = new ArrayList<Point>(src);
+        final ArrayList<Point> hull = new ArrayList<Point>();
+        Point pointOnHull = points.get(extreme(points));
+        Point endpoint = null;
         do
         {
-            /** wrapping **/
-            q = (p + 1) % n;
-            for (int i = 0; i < n; i++)
-                if (CCW(points.get(p), points.get(i), points.get(q)))
-                    q = i;
+            hull.add(pointOnHull);
+            endpoint = points.get(0);
 
-            next[p] = q;
-            p = q;
-        } while (p != leftMost);
+            for (final Point r : points)
+            {
+                // Distance is used to find the outermost point -
+                final int turn = findTurn(pointOnHull, endpoint, r);
+                if (endpoint.equals(pointOnHull) || turn == -1 || turn == 0
+                        && dist(pointOnHull, r) > dist(endpoint, pointOnHull))
+                {
+                    endpoint = r;
+                }
+            }
+            pointOnHull = endpoint;
+        } while (!endpoint.equals(hull.get(0))); // we are back at the start
 
-        /** manage result **/
-        ConvexHull convexHull = new ConvexHull(manage(points, next));
+        ConvexHull convexHull = new ConvexHull(hull);
         return convexHull;
     }
-    private ArrayList<Point> manage(ArrayList<Point> points, int[] next)
-    {
-        ArrayList<Point> dest = new ArrayList<>();
-        System.out.println("\nConvex Hull points : ");
-        for (int i = 0; i < next.length; i++)
-            if (next[i] != -1)
-                dest.add(points.get(i));
-        return dest;
+
+    private int extreme(ArrayList<Point> points) {
+        /** find the leftmost point **/
+        int leftMost = 0;
+        for (int i = 1; i < points.size(); i++)
+            if (points.get(i).getX() < points.get(leftMost).getX())
+                leftMost = i;
+        return leftMost;
     }
+
+    private static int findTurn(final Point p, final Point q, final Point r)
+    {
+        final double x1 = (q.getX() - p.getX()) * (r.getY() - p.getY());
+        final double x2 = (r.getX() - p.getX()) * (q.getY() - p.getY());
+        final double anotherInteger = x1 - x2;
+        return ZERO.compareTo(anotherInteger);
+    }
+    private static double dist(final Point p, final Point q)
+    {
+        final double dx = (q.getX() - p.getX());
+        final double dy = (q.getY() - p.getY());
+        return dx * dx + dy * dy;
+    }
+
 }

@@ -25,16 +25,6 @@ public class Main {
 
         generate(punkty,n,max_x,max_y);
 
-        /*punkty.add(new Point(2,4));
-        punkty.add(new Point(4,4));
-        punkty.add(new Point(4,6));
-        punkty.add(new Point(6,4));
-        punkty.add(new Point(4,2));
-        punkty.add(new Point(2,2));*/
-
-
-
-
         Jarvis jarvis = new Jarvis();
         ConvexHull convexHull = jarvis.convexHull(punkty);
 

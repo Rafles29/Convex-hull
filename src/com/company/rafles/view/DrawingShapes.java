@@ -54,16 +54,9 @@ public class DrawingShapes extends Application {
         ArrayList<Point> punkty= new ArrayList<>();
         double max_x = 700;
         double max_y = 700;
-        int n=20;
+        int n=5;
 
-        punkty.add(new Point(200,400));
-        punkty.add(new Point(400,400));
-        punkty.add(new Point(400,600));
-        punkty.add(new Point(600,400));
-        punkty.add(new Point(400,200));
-        punkty.add(new Point(200,200));
-        punkty.add(new Point(300,300));
-
+        generate(punkty,n,max_x,max_y);
 
         Jarvis jarvis = new Jarvis();
         ConvexHull convexHull = jarvis.convexHull(punkty);
