@@ -77,20 +77,20 @@ public class GeoPointInside implements PointInsideCheck {
         for (i=0; i<n; i++) {
             k=i;
             if (przynaleznosc(polygon.getPoint(i), polygon.getPoint((i+1)%n), p) == 1) {
-                System.out.println("Punkt nalezy do krawedzi wielokata");
+          //      System.out.println("Punkt nalezy do krawedzi wielokata");
                 return 2;
             }
             if (przecinanie(polygon.getPoint(i),polygon.getPoint((i+1)%n))==1)
                 l++;
         }
-        System.out.println("Rozwiazanie--------------");
-        System.out.println("Liczba przeciec: " + l);
+       // System.out.println("Rozwiazanie--------------");
+       // System.out.println("Liczba przeciec: " + l);
         if ((l % 2) == 0) {
-            System.out.println("Punkt p NIE nalezy do wielokata\n");
+        //    System.out.println("Punkt p NIE nalezy do wielokata\n");
             return 0;
         }
         else {
-            System.out.println("Punkt p nalezy do wielokata\n");
+        //    System.out.println("Punkt p nalezy do wielokata\n");
             return 1;
         }
 

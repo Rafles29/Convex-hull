@@ -49,10 +49,10 @@ public class MonteCarlo implements CountArea {
         do {
             this.n += 100;
             area=count(convexHull,max_x,max_y);
-            System.out.println(this.n);
-            System.out.println(area);
 
         } while(this.n < 1000);
+        System.out.println(this.n);
+        System.out.println(area);
         return area;
     }
 }
