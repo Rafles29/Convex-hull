@@ -33,8 +33,7 @@ public class Jarvis {
             {
                 // Distance is used to find the outermost point -
                 final int turn = findTurn(pointOnHull, endpoint, r);
-                if (endpoint.equals(pointOnHull) || turn == -1 || turn == 0
-                        && dist(pointOnHull, r) > dist(endpoint, pointOnHull))
+                if (endpoint.equals(pointOnHull) || turn == -1 || turn == 0 && dist(pointOnHull, r) > dist(endpoint, pointOnHull))
                 {
                     endpoint = r;
                 }
@@ -59,8 +58,8 @@ public class Jarvis {
     {
         final double x1 = (q.getX() - p.getX()) * (r.getY() - p.getY());
         final double x2 = (r.getX() - p.getX()) * (q.getY() - p.getY());
-        final double anotherInteger = x1 - x2;
-        return ZERO.compareTo(anotherInteger);
+        final double anotherDouble = x1 - x2;
+        return ZERO.compareTo(anotherDouble);
     }
     private static double dist(final Point p, final Point q)
     {
