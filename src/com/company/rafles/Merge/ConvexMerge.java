@@ -10,8 +10,11 @@ import java.util.ArrayList;
  */
 public class ConvexMerge {
     public static void merge(ConvexHull ch1, ConvexHull ch2) {
-        ArrayList<Point> tmp = new ArrayList<>();
 
-
+    }
+    public static void mergePart(ConvexHull ch1, ArrayList<Point> dest,int p, int k) {
+        for(int i=p;i<=k;i++) {
+            dest.add(ch1.getPoint(i));
+        }
     }
 }

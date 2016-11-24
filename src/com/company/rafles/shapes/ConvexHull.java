@@ -31,6 +31,8 @@ public class ConvexHull {
     public Point getPoint(int n) {
         return points.get(n);
     }
+    public void addPoint(Point p) {this.points.add(p); }
+    public Point removePoint(int n){return this.points.remove(n);}
 
     @Override
     public String toString() {

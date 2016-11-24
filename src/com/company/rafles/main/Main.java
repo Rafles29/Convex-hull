@@ -2,6 +2,7 @@ package com.company.rafles.main;
 
 import com.company.rafles.AreaCounter.CountArea;
 import com.company.rafles.AreaCounter.MonteCarlo;
+import com.company.rafles.Merge.ConvexMerge;
 import com.company.rafles.SimplePointInShapeChecker.GeoPointInside;
 import com.company.rafles.SimplePointInShapeChecker.PointInsideCheck;
 import com.company.rafles.shapes.ConvexHull;
@@ -13,16 +14,24 @@ public class Main {
 
     public static void main(String[] args) {
         ArrayList<Point> punkty= new ArrayList<>();
-        punkty.add(new Point(2,2));
-        punkty.add(new Point(2,6));
-        punkty.add(new Point(6,2));
+        punkty.add(new Point(1,2));
+        punkty.add(new Point(5,3));
+        punkty.add(new Point(2,1));
         ConvexHull convexHull = new ConvexHull(punkty);
         System.out.println(convexHull);
-        Point p = new Point(3,3);
-        Point r = new Point(0,1);
-        Point s = new Point(3,4.5);
-        System.out.println(convexHull.maxY());
-        System.out.println(convexHull.minY());
+
+        ArrayList<Point> punktyDrugie= new ArrayList<>();
+        punktyDrugie.add(new Point(4,2));
+        punktyDrugie.add(new Point(4,4));
+        punktyDrugie.add(new Point(6,3));
+        ConvexHull convexHull2 = new ConvexHull(punktyDrugie);
+        System.out.println(convexHull2);
+
+        ArrayList<Point> tmp= new ArrayList<>();
+        ConvexMerge.mergePart(convexHull,tmp,0,2);
+        ConvexMerge.mergePart(convexHull2,tmp,0,2);
+        System.out.println(tmp.toString());
+
 
        /* PointInsideCheck pc = new GeoPointInside();
         pc.check(convexHull,p,5);
