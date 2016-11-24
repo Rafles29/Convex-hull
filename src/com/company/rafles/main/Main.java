@@ -1,10 +1,7 @@
 package com.company.rafles.main;
 
-import com.company.rafles.AreaCounter.CountArea;
-import com.company.rafles.AreaCounter.MonteCarlo;
-import com.company.rafles.Merge.ConvexMerge;
-import com.company.rafles.SimplePointInShapeChecker.GeoPointInside;
-import com.company.rafles.SimplePointInShapeChecker.PointInsideCheck;
+import com.company.rafles.ConvexCreateMethod.ConvexMerge;
+import com.company.rafles.ConvexCreateMethod.Jarvis;
 import com.company.rafles.shapes.ConvexHull;
 import com.company.rafles.shapes.Point;
 
@@ -20,17 +17,11 @@ public class Main {
         ConvexHull convexHull = new ConvexHull(punkty);
         System.out.println(convexHull);
 
-        ArrayList<Point> punktyDrugie= new ArrayList<>();
-        punktyDrugie.add(new Point(4,2));
-        punktyDrugie.add(new Point(4,4));
-        punktyDrugie.add(new Point(6,3));
-        ConvexHull convexHull2 = new ConvexHull(punktyDrugie);
-        System.out.println(convexHull2);
-
-        ArrayList<Point> tmp= new ArrayList<>();
-        ConvexMerge.mergePart(convexHull,tmp,0,2);
-        ConvexMerge.mergePart(convexHull2,tmp,0,2);
-        System.out.println(tmp.toString());
+        System.out.println();
+        System.out.println();
+        Jarvis jar = new Jarvis();
+        ConvexHull ch = jar.create(punkty);
+        System.out.println(ch);
 
 
        /* PointInsideCheck pc = new GeoPointInside();
