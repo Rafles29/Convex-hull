@@ -38,4 +38,42 @@ public class ConvexHull {
                 "points=" + points.toString() +
                 '}';
     }
+    public int maxY() {
+        if(getSize() == 0) {
+            return 0;
+        }
+        else {
+            int i=0, counter=0;
+            double tmp = getPoint(0).getY();
+            for(Point point:this.points) {
+                if(tmp < point.getY())
+                {
+                    tmp = point.getY();
+                    counter=i;
+                }
+                i++;
+            }
+            return counter;
+        }
+
+    }
+    public int minY() {
+        if(getSize() == 0) {
+            return 0;
+        }
+        else {
+            int i=0, counter=0;
+            double tmp = getPoint(0).getY();
+            for(Point point:this.points) {
+                if(tmp > point.getY())
+                {
+                    tmp = point.getY();
+                    counter=i;
+                }
+                i++;
+            }
+            return counter;
+        }
+
+    }
 }

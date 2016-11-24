@@ -21,14 +21,16 @@ public class Main {
         Point p = new Point(3,3);
         Point r = new Point(0,1);
         Point s = new Point(3,4.5);
+        System.out.println(convexHull.maxY());
+        System.out.println(convexHull.minY());
 
-        PointInsideCheck pc = new GeoPointInside();
+       /* PointInsideCheck pc = new GeoPointInside();
         pc.check(convexHull,p,5);
         pc.check(convexHull,r,5);
         pc.check(convexHull,s,5);
 
         CountArea mc = new MonteCarlo();
-        mc.estimate(convexHull,7,7);
+        mc.estimate(convexHull,7,7);*/
 
 
     }
