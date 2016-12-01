@@ -33,7 +33,7 @@ public class DrawingShapes extends Application {
     public static void generate(ArrayList<Point> points, int n, double max_x, double max_y) {
         Random random = new Random();
         for (int i=0;i<n;i++)
-            points.add(new Point(random.nextDouble()*max_x,random.nextDouble()*max_y));
+            points.add(new Point(random.nextDouble()*(max_x-10)+5,random.nextDouble()*(max_y-10)+5));
     }
 
     @Override
@@ -52,11 +52,17 @@ public class DrawingShapes extends Application {
     private void draw2DShapes(GraphicsContext gc) {
         double y =gc.getCanvas().getHeight();
         ArrayList<Point> punkty= new ArrayList<>();
-        double max_x = 700;
-        double max_y = 700;
-        int n=5;
+        double max_x = 1000;
+        double max_y = 1000;
+        int n=20;
 
         generate(punkty,n,max_x,max_y);
+
+        for(Point punkt:punkty) {
+
+            gc.strokeOval(punkt.getX(),punkt.getY(),1,1);
+        }
+
 
         Jarvis jarvis = new Jarvis();
         ConvexHull convexHull = jarvis.convexHull(punkty);
@@ -65,11 +71,12 @@ public class DrawingShapes extends Application {
         CountArea mc = new MonteCarlo();
         mc.estimate(convexHull,max_x,max_y);
 
+
         for(int i=1;i<convexHull.getSize();i++) {
-             gc.strokeLine(convexHull.getPoint(i-1).getX(),y-convexHull.getPoint(i-1).getY(),convexHull.getPoint(i).getX(),y-convexHull.getPoint(i).getY());
+             gc.strokeLine(convexHull.getPoint(i-1).getX(),convexHull.getPoint(i-1).getY(),convexHull.getPoint(i).getX(),convexHull.getPoint(i).getY());
             System.out.println(i);
         }
-        gc.strokeLine(convexHull.getPoint(0).getX(),y-convexHull.getPoint(0).getY(),convexHull.getPoint(convexHull.getSize()-1).getX(),y-convexHull.getPoint(convexHull.getSize()-1).getY());
+        gc.strokeLine(convexHull.getPoint(0).getX(),convexHull.getPoint(0).getY(),convexHull.getPoint(convexHull.getSize()-1).getX(),convexHull.getPoint(convexHull.getSize()-1).getY());
 
     }
 }
